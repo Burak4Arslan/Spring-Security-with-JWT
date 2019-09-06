@@ -25,10 +25,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
-
-    /* Trigger when we issue POST request to /login
-    We also need to pass in {"username":"dan", "password":"dan123"} in the request body
-     */
+    // Triggered when we issue POST request to /login
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         // Grab credentials and map them to login viewmodel
@@ -41,18 +38,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // Create login token
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                credentials.getUsername(),
-                credentials.getPassword(),
-                new ArrayList<>());
+                credentials.getUsername(), credentials.getPassword(), new ArrayList<>());
 
         // Authenticate user
         Authentication auth = authenticationManager.authenticate(authenticationToken);
 
         return auth;
     }
-
+    //Triggered when Authentication is successful
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
         // Grab principal
         UserPrincipal principal = (UserPrincipal) authResult.getPrincipal();
 

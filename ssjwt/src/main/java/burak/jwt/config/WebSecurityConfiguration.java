@@ -48,8 +48,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // configure access rules
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/api/public/management/*").authenticated()
-                .antMatchers("/api/public/admin/*").authenticated()
+                .antMatchers("/").permitAll()
+                .antMatchers("/secured").authenticated()
+                .antMatchers("/admin").authenticated()
                 .anyRequest().authenticated();
     }
 

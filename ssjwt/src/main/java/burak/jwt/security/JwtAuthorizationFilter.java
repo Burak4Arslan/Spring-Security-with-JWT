@@ -38,7 +38,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         // If header is present, try grab user principal from database and perform authorization
         Authentication authentication = getUsernamePasswordAuthentication(request);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
         // Continue filter execution
         chain.doFilter(request, response);
     }
